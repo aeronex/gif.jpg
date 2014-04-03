@@ -33,18 +33,24 @@ app.get('/', routes.index);
 app.get('/*', function (req, res) {
 
   var search = req.params[0];
+
+  if (search.substr(-4) === '.gif') {
+    search = search.substr(0, search.length - 4);
+  }
   var files = fs.readdirSync(path.join(__dirname, 'public', 'images'));
 
   files = files.filter(function (file) {
     return file.substr(-4) === '.gif';
   });
 
-  var results = files.filter(function (files) {
-    return file.indexOf(search) > 0;
+  var results = files.filter(function (file) {
+    return file.indexOf(search) > -1;
   });
 
   if (results.length) {
-    res.sendfile(results[0]);
+    var serveThisFile = path.join(__dirname, 'public', 'images', results[0]);
+    console.log(serveThisFile);
+    res.sendfile(serveThisFile);
   } else {
     res.send('nope sorry');
   }
