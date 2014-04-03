@@ -1,0 +1,19 @@
+{
+  "name": "gif.jpg",
+  "version": "0.0.0",
+  "description": "Get gifs and jpegs, fancy.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aeronex/gif.jpg.git"
+  },
+  "author": "Parker Ortlieb",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aeronex/gif.jpg/issues"
+  },
+  "homepage": "https://github.com/aeronex/gif.jpg"
+}
