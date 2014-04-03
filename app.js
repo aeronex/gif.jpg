@@ -7,6 +7,7 @@ var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
 var http = require('http');
+var fs = require('fs');
 var path = require('path');
 
 var app = express();
@@ -29,7 +30,25 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
-app.get('/users', user.list);
+app.get('/*', function (req, res) {
+
+  var search = req.params[0];
+  var files = fs.readdirSync(path.join(__dirname, 'public', 'images'));
+
+  files = files.filter(function (file) {
+    return file.substr(-4) === '.gif';
+  });
+
+  var results = files.filter(function (files) {
+    return file.indexOf(search) > 0;
+  });
+
+  if (results.length) {
+    res.sendfile(results[0]);
+  } else {
+    res.send('nope sorry');
+  }
+});
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
